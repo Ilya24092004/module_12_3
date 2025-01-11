@@ -46,10 +46,10 @@ class Tournament:
 
 
 class TournamentTest(TestCase):
+    is_frozen = True
     @classmethod
     def setUpClass(cls):
         cls.all_results = {}
-
     def setUp(self):
         self.usain = Runner('Усэйн', 10)
         self.andrey = Runner('Андрей', 9)
@@ -63,24 +63,28 @@ class TournamentTest(TestCase):
             print(f'{test}:')
             print({k: str(v) for k, v in cls.all_results[test].items()})
 
+    @unittest.skipIf(is_frozen, 'Тесты в этом кейсе заморожены')
     def test_usain_nik(self):
         tour = Tournament(90, self.usain, self.nik)
         results = tour.start()
         self.all_results[inspect.stack()[0][3]] = results
         self.assertTrue('Ник' == results[len(results)].name)
 
+    @unittest.skipIf(is_frozen, 'Тесты в этом кейсе заморожены')
     def test_andrey_nik(self):
         tour = Tournament(90, self.andrey, self.nik)
         results = tour.start()
         self.all_results[inspect.stack()[0][3]] = results
         self.assertTrue('Ник' == results[len(results)].name)
 
+    @unittest.skipIf(is_frozen, 'Тесты в этом кейсе заморожены')
     def test_usain_andrey_nik(self):
         tour = Tournament(90, self.usain, self.andrey, self.nik)
         results = tour.start()
         self.all_results[inspect.stack()[0][3]] = results
         self.assertTrue('Ник' == results[len(results)].name)
 
+    @unittest.skipIf(is_frozen, 'Тесты в этом кейсе заморожены')
     def test_nik_andrey_usain_8(self):
         tour = Tournament(8, self.nik, self.andrey, self.usain)
         results = tour.start()

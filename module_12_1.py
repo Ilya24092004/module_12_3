@@ -1,3 +1,4 @@
+from pickle import FALSE
 from unittest import TestCase
 import unittest
 
@@ -18,18 +19,23 @@ class Runner:
         return self.name
 
 class RunnerTest(TestCase):
+    is_frozen = False
+
+    @unittest.skipIf(is_frozen, 'Тесты в этом кейсе заморожены')
     def test_walk(self):
         peshehod = Runner('Пешеход')
         for i in range(10):
             peshehod.walk()
         self.assertEqual(peshehod.distance, 50)
 
+    @unittest.skipIf(is_frozen, 'Тесты в этом кейсе заморожены')
     def test_run(self):
         begun = Runner('Бегун')
         for i in range(10):
             begun.run()
         self.assertEqual(begun.distance, 100)
 
+    @unittest.skipIf(is_frozen, 'Тесты в этом кейсе заморожены')
     def test_challenge(self):
         peshehod = Runner('Пешеход')
         begun = Runner('Бегун')
